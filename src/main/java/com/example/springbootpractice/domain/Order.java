@@ -22,7 +22,7 @@ public class Order {
 
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
+    @Column()
     private Long id;
 
     @ManyToOne(fetch = LAZY)
