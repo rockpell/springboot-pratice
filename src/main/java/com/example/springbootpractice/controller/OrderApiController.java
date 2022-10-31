@@ -43,4 +43,19 @@ public class OrderApiController {
 
         return result;
     }
+
+    /*
+    * jpa의 distinct 기능을 활용해서 데이터 뻥튀기를 제거
+    * query에서의 distinct는 완전히 일치하는 중복데이터만 지워주기 때문에 별 의미 없고
+    * jpa의 distinct가 동작하면 겹치는 데이터를 묶어서 반환해준다.
+    * 단 페이지네이션이 안되고 메모리에 전부 올려서 원하는 개수만큼 내려주는 문제가 생긴다.
+    * */
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> ordersV3() {
+        List<Order> orders = orderRepository.findAllWithItem();
+        List<OrderDto> result = orders.stream()
+                .map(o -> new OrderDto(o))
+                .collect(toList());
+        return result;
+    }
 }
