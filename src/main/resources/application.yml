@@ -19,11 +19,11 @@ spring:
       enabled: true
       path: /h2-console
 
-logging:
-  level:
-    org:
-      hibernate:
-        sql: debug
-        type:
-          descriptor:
-            sql: trace
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        sql: debug
+#        type:
+#          descriptor:
+#            sql: trace
