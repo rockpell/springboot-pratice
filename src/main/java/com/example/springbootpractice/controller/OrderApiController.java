@@ -4,6 +4,8 @@ import com.example.springbootpractice.domain.Order;
 import com.example.springbootpractice.domain.OrderItem;
 import com.example.springbootpractice.repository.OrderRepository;
 import com.example.springbootpractice.repository.OrderSearch;
+import com.example.springbootpractice.repository.query.OrderQueryDto;
+import com.example.springbootpractice.repository.query.OrderQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class OrderApiController {
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     /*
      * V1. 엔티티 직접 노출
@@ -75,5 +78,10 @@ public class OrderApiController {
                 .collect(toList());
 
         return result;
+    }
+
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> orderV4() {
+        return orderQueryRepository.findOrderQueryDtos();
     }
 }
